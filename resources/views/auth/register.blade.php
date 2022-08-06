@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('titre','Inscription |'.env('APP_NAME'))
 @section('content')
 <!DOCTYPE html>
 <html lang="en">
@@ -7,7 +7,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Inscription</title>
+    <style>
+            body {
+                font-family: 'Nunito', sans-serif;
+            }
+        </style>
 </head>
 <body>
     <center>
@@ -36,7 +41,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <h2><i><u><label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Adresse Email') }}</label></u></i></h2>
+                            <h2><i><u><label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Adresse e-mail') }}</label></u></i></h2>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
@@ -74,7 +79,7 @@
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('S inscrire') }}
+                                    {{ __('Inscription') }}
                                 </button>
                             </div>
                         </div>
