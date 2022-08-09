@@ -1,0 +1,53 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    outline: none;
+}
+input{
+    width: 50px;
+    font-size: 30px;
+    pointer-events: none;
+    margin: 10;
+}
+img{
+    margin: auto;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    padding-bottom: 10px;
+}
+.images{
+    width: 50%;
+    margin: auto;
+}
+.voting{
+    position: relative;
+    border: 3px solid #FFFFFF;
+    border-radius: 4px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+}
+button{
+       
+        background: none;
+        border: none;
+        font-size: 30px;
+        padding: 0 15px;
+        margin: 10px 0;
+        margin-left: 20px;
+        cursor: pointer;
+}
+button :active{
+    color: #004eff;
+    transform: scale(1.2)
+}
+textarea{
+    position: relative;
+    border: 1px solid #2b2828;
+    border-radius: 10px;
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+}
