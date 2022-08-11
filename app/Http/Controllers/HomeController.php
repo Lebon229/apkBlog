@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\UploadedFile;
 use App\Http\Requests\StoreFileRequest;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
+
 
 class HomeController extends Controller
 {
@@ -45,6 +47,24 @@ class HomeController extends Controller
             "unliked_number"=>0,
             "created_at"=>Carbon::now()
         ]);
+        return back();
+    }
+
+    public function comments(Request $request){
+        DB::table('comment')->insert([
+            'article_commented'=>$request->input('id'),
+            'description'=>$request->input('description'),
+            'commentedBy'=> Auth::User()->id
+        ]);
+        $number_of_comments = DB::table('article')->where('id',$request->input('id'))->value('number_of_comments');
+        DB::table('article')->where('id',$request->input('id'))->update([
+            'number_of_comments'=>$number_of_comments+1
+        ]);
+        return back();
+    }
+
+    public function supprimer($id){
+        DB::table('article')->where('id',$id)->delete();
         return back();
     }
 }

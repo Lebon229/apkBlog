@@ -20,6 +20,7 @@ class CreateArticleTable extends Migration
             $table->string('image')->nullable();
             $table->string('liked_number');
             $table->string('unliked_number');
+            $table->string('number_of_comments');
             $table->timestamps();
         });
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ArticlesController extends Controller
 {
@@ -13,7 +14,8 @@ class ArticlesController extends Controller
      */
     public function index()
     {
-        return view('index');
+        $article = DB::table('article')->get();
+        return view('home', ['article'=> $article]);
     }
 
     /**
@@ -35,13 +37,6 @@ class ArticlesController extends Controller
     public function store(Request $request)
     {
         //
-        $id= uniqid('kk',8);
-            DB:table("users")->insert([
-                "id"=>$id,
-                "titre"=>$request->input(titre),
-                "description"=>$request->input(description),
-                "image"=>$request->input(image),
-            ]);
     }
 
     /**
@@ -87,5 +82,21 @@ class ArticlesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function like($id){
+        $like_number = DB::table('article')->where('id',$id)->value('liked_number');
+        DB::table('article')->where('id',$id)->update([
+            'liked_number'=>$like_number+1
+        ]);
+        return back();
+    }
+
+    public function unlike($id){
+        $unlike_number = DB::table('article')->where('id',$id)->value('unliked_number');
+        DB::table('article')->where('id',$id)->update([
+            'unliked_number'=>$unlike_number+1
+        ]);
+        return back();
     }
 }

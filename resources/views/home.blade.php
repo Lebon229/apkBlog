@@ -52,23 +52,21 @@
                             <i class="bx bx-fullscreen"></i>
                         </button>
                     </div>
-
+                    @guest
                     <div class="dropdown d-inline-block">
-                        <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="rounded-circle header-profile-user" src="assets/images/users/avatar-1.jpg" alt="Header Avatar">
-                            <span class="d-none d-xl-inline-block ms-1" key="t-henry">Henry</span>
-                            <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-end">
-                            <!-- item-->
-                            <a class="dropdown-item" href="#"><i class="bx bx-user font-size-16 align-middle me-1"></i> <span key="t-profile">Profile</span></a>
-                            <a class="dropdown-item" href="#"><i class="bx bx-wallet font-size-16 align-middle me-1"></i> <span key="t-my-wallet">My Wallet</span></a>
-                            <a class="dropdown-item d-block" href="#"><span class="badge bg-success float-end">11</span><i class="bx bx-wrench font-size-16 align-middle me-1"></i> <span key="t-settings">Settings</span></a>
-                            <a class="dropdown-item" href="#"><i class="bx bx-lock-open font-size-16 align-middle me-1"></i> <span key="t-lock-screen">Lock screen</span></a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item text-danger" href="#"><i class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> <span key="t-logout">Logout</span></a>
-                        </div>
+                        <a href="/login">
+                            <button type="button" class="btn header-item waves-effect" id="page-header-user">
+                                <span class="d-none d-xl-inline-block ms-1">Se Connecter</span>
+                            </button>
+                        </a>
+                        <a href="/register">
+                            <button type="button" class="btn header-item waves-effect" id="page-header-user">
+                                <span class="d-none d-xl-inline-block ms-1">S'Enregistrer</span>
+                            </button>
+                        </a>
                     </div>
+                    @else
+                    @endguest
 
                 </div>
             </div>
@@ -89,8 +87,13 @@
                                 <div class="card-body">
                                     <div>
                                         <!-- center modal -->
-                                        <button type="button" class="btn btn-success waves-effect waves-light" data-bs-toggle="modal" data-bs-target=".bs-example-modal-center"> Ajouter un article</button>
-
+                                        @guest
+                                        @else
+                                            @if(Auth::user()->profile_type=="guest")
+                                            @else
+                                            <button type="button" class="btn btn-success waves-effect waves-light" data-bs-toggle="modal" data-bs-target=".bs-example-modal-center"> Ajouter un article</button>
+                                            @endif    
+                                        @endguest
                                         <div class="modal fade bs-example-modal-center" tabindex="-1" style="display: none;" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content">
@@ -166,21 +169,44 @@
                                                                     <div class="p-3">
                                                                         <ul class="list-inline">
                                                                             <li class="list-inline-item me-3">
-                                                                                <a href="#" class="text-muted">
-                                                                                    <i class="bx bx-purchase-tag-alt align-middle text-muted me-1"></i> Project
+                                                                                <a href="/like/{{$article->id}}" class="text-muted">
+                                                                                    <i class="fas fa-heart align-middle text-muted me-1"></i>{{$article->liked_number}} Like
+                                                                                </a>
+                                                                            </li>
+                                                                            <li class="list-inline-item me-3">
+                                                                                <a href="/unlike/{{$article->id}}" class="text-muted">
+                                                                                    <i class="fas fa-heart-broken align-middle text-muted me-1"></i>{{$article->unliked_number}} UnLike
                                                                                 </a>
                                                                             </li>
                                                                             <li class="list-inline-item me-3">
                                                                                 <a href="#" class="text-muted">
-                                                                                    <i class="bx bx-comment-dots align-middle text-muted me-1"></i> 12 Comments
+                                                                                    <i class="bx bx-comment-dots align-middle text-muted me-1"></i>{{$article->number_of_comments}} Comments
                                                                                 </a>
                                                                             </li>
+                                                                            @guest
+                                                                            @else
+                                                                                @if(Auth::user()->profile_type=="guest")
+                                                                                @else
+                                                                                <li class="list-inline-item me-3">
+                                                                                    <a href="/supprimer/{{$article->id}}" class="text-muted">
+                                                                                        <i class="fas fa-trash-alt align-middle text-danger me-1"></i>Supprimer l'article
+                                                                                    </a>
+                                                                                </li>
+                                                                                @endif    
+                                                                            @endguest
                                                                         </ul>
                                                                         <p>{{$article->description}}</p>
-
-                                                                        <div>
-                                                                            <a href="#" class="text-primary">Read more <i class="mdi mdi-arrow-right"></i></a>
-                                                                        </div>
+                                                                        <form method="POST" action="/comments">
+                                                                            @csrf
+                                                                            <div>
+                                                                                <input type="hidden" value="{{$article->id}}" name="id">
+                                                                                <div class="form-floating mb-3">
+                                                                                <input type="text" class="form-control" id="floatingnameInput" placeholder="Enter Name" value="" name="description">
+                                                                                <label for="floatingnameInput">Mettre un commentaire</label>
+                                                                            </div>
+                                                                            <button class="btn btn-info" type="submit">Enregistrer votre commentaire</button>
+                                                                        </form
+>                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
