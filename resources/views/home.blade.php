@@ -29,7 +29,7 @@
                 <div class="d-flex">
                     <!-- LOGO -->
                     <div class="navbar-brand-box align-items-center">
-                        <h1 style="color:#fff" class="mt-2">APK BLOG</h1>
+                        <h1 style="color:#fff" class="mt-2">ApkBlog</h1>
                     </div>
 
                     <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect" id="vertical-menu-btn">
@@ -47,26 +47,23 @@
 
                 <div class="d-flex">
 
-                    <div class="dropdown d-none d-lg-inline-block ms-1">
-                        <button type="button" class="btn header-item noti-icon waves-effect" data-toggle="fullscreen">
-                            <i class="bx bx-fullscreen"></i>
-                        </button>
-                    </div>
+                    
                     @guest
                     <div class="dropdown d-inline-block">
                         <a href="/login">
-                            <button type="button" class="btn header-item waves-effect" id="page-header-user">
+                            <button type="button" class="btn btn-success fab fa-connectdevelop" id="page-header-user">
                                 <span class="d-none d-xl-inline-block ms-1">Se Connecter</span>
                             </button>
                         </a>
                         <a href="/register">
-                            <button type="button" class="btn header-item waves-effect" id="page-header-user">
+                            <button type="button" class="btn btn-success fas fa-cash-register" id="page-header-user">
                                 <span class="d-none d-xl-inline-block ms-1">S'Enregistrer</span>
                             </button>
                         </a>
                     </div>
                     @else
                     <div  aria-labelledby="">
+                    <button type="button" class="btn btn-danger mdi-logout" id="page-header-user">
                                     <a class="" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -76,6 +73,7 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
+                                    </button>
                                 </div>
                     @endguest
 
@@ -152,7 +150,7 @@
                                 <ul class="nav nav-tabs nav-tabs-custom justify-content-center pt-2" role="tablist">
                                     <li class="nav-item">
                                         <a class="nav-link active" data-bs-toggle="tab" href="#all-post" role="tab">
-                                            All Post
+                                            Tous les articles disponibles
                                         </a>
                                     </li>
                                 </ul>
@@ -186,12 +184,12 @@
                                                                             </li>
                                                                             <li class="list-inline-item me-3">
                                                                                 <a href="/unlike/{{$article->id}}" class="text-muted">
-                                                                                    <i class="fas fa-heart-broken align-middle text-muted me-1"></i>{{$article->unliked_number}} UnLike
+                                                                                    <i class="fas fa-heart-broken align-middle text-muted me-1"></i>{{$article->unliked_number}} disLike
                                                                                 </a>
                                                                             </li>
                                                                             <li class="list-inline-item me-3">
                                                                                 <a href="#" class="text-muted">
-                                                                                    <i class="bx bx-comment-dots align-middle text-muted me-1"></i>{{$article->number_of_comments}} Comments
+                                                                                    <i class="bx bx-comment-dots align-middle text-muted me-1"></i>{{$article->number_of_comments}} Commentaires
                                                                                 </a>
                                                                             </li>
                                                                             @guest
@@ -240,22 +238,20 @@
             <!-- End Page-content -->
 
 
-            <footer class="footer">
+           <center>
+           <footer class="footer">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-6">
                             <script>
                                 document.write(new Date().getFullYear())
-                            </script> © Skote.
+                            </script> © Copyrigth.
                         </div>
-                        <div class="col-sm-6">
-                            <div class="text-sm-end d-none d-sm-block">
-                                Design & Develop by Themesbrand
-                            </div>
                         </div>
                     </div>
                 </div>
             </footer>
+           </center>
         </div>
         <!-- end main content-->
 

@@ -16,6 +16,7 @@ class CreateCommentTable extends Migration
         Schema::create('comment', function (Blueprint $table) {
             $table->id();
             $table->string('description');
+            $table->string('article_commented');
             $table->string('commentedBy')->nullable();
             $table->foreign('commentedBy')->references('id')->on('users')->onDelete('cascade');
 

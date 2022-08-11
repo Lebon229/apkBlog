@@ -79,5 +79,13 @@
             @yield('content')
         </main>
     </div>
+   <center>
+   <footer>
+                <p class="text-gray-400">
+                &copy; Copyrigth {{date('Y')}}
+                </p>
+                
+            </footer>
+   </center>
 </body>
 </html>

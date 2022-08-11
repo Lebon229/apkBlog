@@ -95,7 +95,7 @@
                
 <style>
     body{
-    background: #67BE4B;
+    background: #fff;
 }
 #container{
     width:400px;

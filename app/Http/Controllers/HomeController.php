@@ -45,6 +45,7 @@ class HomeController extends Controller
             "image"=>$fileName,
             "liked_number"=>0,
             "unliked_number"=>0,
+            'number_of_comments'=>0,
             "created_at"=>Carbon::now()
         ]);
         return back();
